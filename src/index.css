@@ -1,0 +1,94 @@
+@import 'tailwindcss';
+
+/* Тёмно-зелёная палитра перенесена из ../turnir — приложение всегда тёмное,
+   светлой темы у него нет и не было. */
+@theme {
+  --color-bg: #0a0e0a;
+  --color-surface: #111811;
+  --color-card: #162016;
+  --color-line: #1e2e1e;
+
+  --color-brand: #22c55e;
+  --color-brand-dim: #16a34a;
+
+  --color-ink: #e8f5e8;
+  --color-ink-muted: #6b8a6b;
+  --color-ink-dim: #4a6a4a;
+
+  --color-danger: #ef4444;
+  --color-gold: #fbbf24;
+  --color-lucky: #f97316;
+
+  --font-sans: 'Segoe UI', system-ui, sans-serif;
+
+  --animate-confetti: confetti-fall linear forwards;
+  --animate-pulse-live: pulse-live 1.5s infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-live {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+  }
+
+  /* Поля ввода счёта — только цифры, без стрелок, которые сбивают палец. */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  ::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-line rounded-full;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
